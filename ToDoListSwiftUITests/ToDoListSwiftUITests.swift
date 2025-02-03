@@ -9,35 +9,35 @@ import XCTest
 
 final class ToDoListSwiftUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+  
+    
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testToDo() throws {
+       
         let app = XCUIApplication()
         app.launch()
+        
+        
+        let addButton = app.navigationBars["ToDoListSwift.View"].buttons["Add"]
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+        let elementsQuery = app.alerts["Add Item"].scrollViews.otherElements
+        let textField = elementsQuery.collectionViews/*@START_MENU_TOKEN@*/.textFields["Enter your item"]/*[[".cells.textFields[\"Enter your item\"]",".textFields[\"Enter your item\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        let okButton = elementsQuery.buttons["OK"]
+        
+        
+        addButton.tap()
+        textField.tap()
+        textField.typeText("new")
+        okButton.tap()
+        
+       
+        
 
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
     }
+    
+    
+
+ 
 }
+
